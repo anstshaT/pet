@@ -1,28 +1,44 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
-
-import { NewAppScreen } from '@react-native/new-app-screen';
-import { StatusBar, StyleSheet, useColorScheme, View } from 'react-native';
+import {
+  SafeAreaView,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 
 function App() {
-  const isDarkMode = useColorScheme() === 'dark';
-
   return (
-    <View style={styles.container}>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <NewAppScreen templateFileName="App.tsx" />
-    </View>
+    <SafeAreaView>
+      <View>
+        <Text>Раді тебе вітати!</Text>
+        <Text>
+          Кожен пухнастик заслоговує на дбайливих господарів. Ми допоможемо
+          знайти тобі друга
+        </Text>
+      </View>
+      <View>
+        <TouchableOpacity>
+          <Text>Вхід</Text>
+        </TouchableOpacity>
+        <TouchableOpacity>
+          <Text>Регістрація</Text>
+        </TouchableOpacity>
+      </View>
+      <View>
+        <View>
+          <View>
+            <TextInput />
+          </View>
+          <View>
+            <TextInput />
+          </View>
+        </View>
+        <TouchableOpacity>
+          <Text>Увійти</Text>
+        </TouchableOpacity>
+      </View>
+    </SafeAreaView>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-});
 
 export default App;
