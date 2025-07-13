@@ -32,10 +32,12 @@ export default StyleSheet.create({
     borderRadius: 20,
     flex: 1,
   },
+
   authText: {
     color: '#0B0B0B',
     fontSize: 14,
   },
+
   registrationBtn: {
     alignItems: 'center',
     padding: 10,
@@ -43,9 +45,11 @@ export default StyleSheet.create({
     flex: 1,
     opacity: 0.7,
   },
+
   titleContainer: {
     gap: 4,
   },
+
   inputContainer: {
     borderWidth: 1,
     borderRadius: 25,
@@ -57,16 +61,20 @@ export default StyleSheet.create({
       default: 12,
     }),
   },
+
   formContainer: { marginTop: 28, marginBottom: 68 },
+
   input: {
     padding: 0,
   },
+
   loginBtnContainer: {
     borderRadius: 25,
     backgroundColor: '#7A71BA',
     paddingVertical: 12,
     alignItems: 'center',
   },
+
   loginText: {
     color: 'white',
   },

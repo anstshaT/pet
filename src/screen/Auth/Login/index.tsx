@@ -1,7 +1,48 @@
 import { Text, TextInput, TouchableOpacity, View } from 'react-native';
 import styles from './styles';
+import { useState } from 'react';
+
+interface InputValue {
+  email: string;
+  password: string;
+  errorEmail: null | string;
+  errorPassword: null | string;
+}
 
 export default function LoginPage() {
+  const [inputValues, setInputValues] = useState<InputValue>({
+    email: '',
+    password: '',
+    errorEmail: null,
+    errorPassword: null,
+  });
+
+  const handleChangeText = (
+    key: 'email' | 'password' | 'errorEmail' | 'errorPassword',
+    value: string | null,
+  ) => {
+    setInputValues(prevState => ({ ...prevState, [key]: value }));
+  };
+
+  const checkEmail = () => {
+    const emailValidator = new RegExp(
+      '^([a-z0-9._%-]+@[a-z0-9.-]+.[a-z]{2,6})*$',
+    );
+    if (!emailValidator.test(inputValues.email)) {
+      handleChangeText('errorEmail', 'Not valid email');
+    } else {
+      handleChangeText('errorEmail', null);
+    }
+  };
+
+  const checkPassword = text => {
+    if (text.length < 8) {
+      handleChangeText('errorPassword', 'Password must be more than 8 symbols');
+    } else {
+      handleChangeText('errorPassword', null);
+    }
+  };
+
   return (
     <View style={[styles.mainWrapper]}>
       <View style={styles.titleContainer}>
@@ -24,16 +65,30 @@ export default function LoginPage() {
           <TextInput
             placeholder={'Email'}
             style={styles.input}
+            onBlur={() => {
+              checkEmail();
+            }}
             placeholderTextColor={'#838383'}
+            value={inputValues.email}
+            onChangeText={text => handleChangeText('email', text)}
           />
         </View>
+        {inputValues.errorEmail && <Text>{inputValues.errorEmail}</Text>}
+
         <View style={styles.inputContainer}>
           <TextInput
             placeholder={'Password'}
             style={styles.input}
             placeholderTextColor={'#838383'}
+            value={inputValues.password}
+            onChangeText={text => {
+              handleChangeText('password', text);
+              checkPassword(text);
+            }}
+            secureTextEntry
           />
         </View>
+        {inputValues.errorPassword && <Text>{inputValues.errorPassword}</Text>}
       </View>
       <TouchableOpacity style={styles.loginBtnContainer}>
         <Text style={styles.loginText}>Увійти</Text>
