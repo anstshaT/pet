@@ -1,4 +1,4 @@
-import { Platform, StyleSheet } from 'react-native';
+import { Platform, RootTagContext, StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
   mainWrapper: {
@@ -57,6 +57,21 @@ export default StyleSheet.create({
       ios: 14,
       default: 12,
     }),
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+
+  activePasswordBtn: {
+    height: 15,
+    width: 15,
+    backgroundColor: '#79be11ff',
+  },
+
+  disabledPasswordBtn: {
+    height: 15,
+    width: 15,
+    backgroundColor: '#750909ff',
   },
 
   formContainer: { marginTop: 28, marginBottom: 68 },

@@ -19,6 +19,7 @@ interface InputValue {
 }
 
 export default function LoginPage() {
+  const [isPassHidden, setIsPassHidden] = useState(true);
   const [inputValues, setInputValues] = useState<InputValue>({
     email: '',
     password: '',
@@ -51,6 +52,13 @@ export default function LoginPage() {
       handleChangeText('errorPassword', null);
     }
   };
+
+  const isDisabledLoginBtn = Boolean(
+    inputValues.errorEmail ||
+      inputValues.errorPassword ||
+      !inputValues.email ||
+      !inputValues.password,
+  );
 
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
@@ -99,14 +107,31 @@ export default function LoginPage() {
                   handleChangeText('password', text);
                   checkPassword(text);
                 }}
-                secureTextEntry
+                secureTextEntry={isPassHidden}
+              />
+              <TouchableOpacity
+                onPress={() => {
+                  setIsPassHidden(!isPassHidden);
+                }}
+                hitSlop={{ top: 15, bottom: 15, right: 15, left: 15 }}
+                style={
+                  isPassHidden
+                    ? styles.disabledPasswordBtn
+                    : styles.activePasswordBtn
+                }
               />
             </View>
             {inputValues.errorPassword && (
               <Text>{inputValues.errorPassword}</Text>
             )}
           </View>
-          <TouchableOpacity style={styles.loginBtnContainer}>
+          <TouchableOpacity
+            style={[
+              styles.loginBtnContainer,
+              isDisabledLoginBtn && { opacity: 0.5 },
+            ]}
+            disabled={isDisabledLoginBtn}
+          >
             <Text style={styles.loginText}>Увійти</Text>
           </TouchableOpacity>
         </KeyboardAvoidingView>
